@@ -1,4 +1,5 @@
 import bot from "./bot.js";
+import { wfp } from "./wfpinit.js";
 
 const cosmetology = () => {    
 
@@ -19,6 +20,15 @@ const cosmetology = () => {
         }
 
         if (action === 'cosmetology_detals') {
+            const session = await wfp.createInvoiceUrl({
+                orderReference: (Math.random() * 1e17).toString(),
+                productName: ['Косметологія' + ',' + chatId],
+                productCount: [1],
+                productPrice: [100],
+            });
+            
+            console.log(session.value?.invoiceUrl)
+
             bot.sendMessage(chatId, `
 1. Основи антивікової терапії: концепції та підходи
 2. Сучасні методи діагностики та моніторингу старіння
@@ -27,12 +37,16 @@ const cosmetology = () => {
 5. Біологічні та генетичні аспекти антивікових стратегій`, { 
                 reply_markup: {
                     inline_keyboard: [
-                        [{ text: 'Оплатити', url: 'https://wayforpay.com/uk' }],
+                        [{ text: 'Оплатити', url: session.value?.invoiceUrl }],
                       
                     ]
                 }}
-            )
-        }
+            );
+
+            bot.sendVideo(chatId, 'BAACAgIAAyEFAASBiWGlAAMMZnrHwQri1feHJfMrsLC7Kviq7ogAAsVUAAKhg9BLkbwKoU1R27E1BA')
+        };
+
+
 
 
 

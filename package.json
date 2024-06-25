@@ -11,6 +11,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "node-telegram-bot-api": "^0.66.0"
+    "crypto": "^1.0.1",
+    "express": "^4.19.2",
+    "luxon": "^3.4.4",
+    "node-telegram-bot-api": "^0.66.0",
+    "overshom-wayforpay": "^1.1.0",
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7"
   }
 }

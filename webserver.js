@@ -9,17 +9,23 @@ const server = () => {
     const app = e();
     const port = 3000;
 
+    app.use(express.json()) // for parsing application/json
+    app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
     app.get('/', (req, res) => {
         res.send('Hello World!')
     });
 
     app.post('/webhook', async (req, res) => {
 
-        const body = await req.text();  
+
+        const body = await req.body;  
+
+        console.log(body);
         const object = JSON.parse(body);
 
 
-        console.log(body);
+        
         const data = object
 
         const forHash = [

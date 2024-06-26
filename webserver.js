@@ -19,10 +19,10 @@ const server = () => {
     app.post('/webhook', async (req, res) => {
 
 
-        const {body} = await req.body;  
-        console.log(body);
-        const data = body;
-
+        const body = await req.body;  
+        
+        const { data } = body;
+        console.log(data);
         console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus)
 
         const forHash = [

@@ -8,7 +8,7 @@ export const wfp = new WFP({
     MERCHANT_SECRET_KEY: values.merchant_sercret,
     MERCHANT_DOMAIN_NAME: '51.20.1.118:3000',
     // service URL needed to receive webhooks
-    SERVICE_URL: `51.20.1.118:3000/webhook`,
+    SERVICE_URL: '51.20.1.118:3000/webhook',
 });
 
 

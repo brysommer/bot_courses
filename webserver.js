@@ -20,13 +20,8 @@ const server = () => {
 
 
         const body = await req.body;  
-
         console.log(body);
-        const object = JSON.parse(body);
-
-
-        
-        const data = object
+        const data = body;
 
         const forHash = [
             data.merchantAccount,

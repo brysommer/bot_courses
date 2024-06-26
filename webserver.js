@@ -19,9 +19,11 @@ const server = () => {
     app.post('/webhook', async (req, res) => {
 
 
-        const { body } = await req.body;  
+        const body = await req.body;  
         console.log(body);
         const data = body;
+
+        console.log(data.merchantSignature)
 
         const forHash = [
             data.merchantAccount,
@@ -40,7 +42,7 @@ const server = () => {
             .digest('hex');
 
         console.log(expectedMerchantSignature);
-        console.log(data.merchantSignature)
+        
 
         if (expectedMerchantSignature !== data.merchantSignature) {
             throw new Error('Corrupted webhook received. Webhook signature is not authentic.');

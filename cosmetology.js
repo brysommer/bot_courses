@@ -24,7 +24,7 @@ const cosmetology = () => {
                 orderReference: (Math.random() * 1e17).toString(),
                 productName: ['Косметологія' + ',' + chatId],
                 productCount: [1],
-                productPrice: [100],
+                productPrice: [3],
             });
             
             console.log(session.value?.invoiceUrl)

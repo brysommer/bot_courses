@@ -39,6 +39,9 @@ const server = () => {
             .update(forHash)
             .digest('hex');
 
+        console.log(expectedMerchantSignature);
+        console.log(data.merchantSignature)
+
         if (expectedMerchantSignature !== data.merchantSignature) {
             throw new Error('Corrupted webhook received. Webhook signature is not authentic.');
         }

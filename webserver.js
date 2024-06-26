@@ -23,7 +23,7 @@ const server = () => {
         console.log(body);
         const data = body;
 
-        console.log(data.merchantSignature)
+        console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus)
 
         const forHash = [
             data.merchantAccount,

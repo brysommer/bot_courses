@@ -9,8 +9,8 @@ const server = () => {
     const app = e();
     const port = 3000;
 
-    app.use(express.json()) // for parsing application/json
-    app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+    app.use(e.json()) // for parsing application/json
+    app.use(e.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
     app.get('/', (req, res) => {
         res.send('Hello World!')

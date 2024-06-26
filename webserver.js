@@ -18,6 +18,8 @@ const server = () => {
         const body = await req.text();  
         const object = JSON.parse(body);
 
+
+        console.log(body);
         const data = object
 
         const forHash = [

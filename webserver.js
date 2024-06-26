@@ -13,7 +13,7 @@ const server = () => {
         res.send('Hello World!')
     });
 
-    app.post('/', async (req, res) => {
+    app.post('/webhook', async (req, res) => {
 
         const body = await req.text();  
         const object = JSON.parse(body);

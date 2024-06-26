@@ -21,7 +21,7 @@ const server = () => {
 
         const body = await req.body;  
         
-        const { data } = body;
+        const data = JSON.parse(body);
         console.log(data);
         console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus)
 

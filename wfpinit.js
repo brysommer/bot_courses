@@ -6,9 +6,9 @@ WFP_CONFIG.DEFAULT_PAYMENT_CURRENCY = 'UAH';
 export const wfp = new WFP({
     MERCHANT_ACCOUNT: 'itgin_online',
     MERCHANT_SECRET_KEY: values.merchant_sercret,
-    MERCHANT_DOMAIN_NAME: '192.168.0.1',
+    MERCHANT_DOMAIN_NAME: '172.31.38.9',
     // service URL needed to receive webhooks
-    SERVICE_URL: `'192.168.0.1'/webhook`,
+    SERVICE_URL: `172.31.38.9'/webhook`,
 });
 
 

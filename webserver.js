@@ -19,8 +19,8 @@ const server = () => {
     app.post('/webhook', async (req, res) => {
 
 
-        const {body} = await req.body;  
-        
+        const body = await req.body;  
+        console.log(body);
         const data = JSON.parse(body);
         console.log(data);
         console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus)

@@ -2,13 +2,13 @@ import bot from "./bot.js";
 
 const generateMenu = async () => {
     try {
+        delete require.cache[require.resolve('./coursesList.js')];  // Очистити кеш
         const { courses } = await import('./coursesList.js');
         const menu = courses.map(course => [
             { text: course.text, callback_data: course.callback }
         ]);
         menu.push([{ text: 'Правила користування ботом', url: 'https://telegra.ph/BAZA-KURSOV-06-23' }]);
 
-        console.log(menu)
         return menu;
     } catch (err) {
         console.error('Помилка при створенні меню:', err);

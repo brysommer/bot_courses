@@ -20,7 +20,7 @@ const server = () => {
 
 
         const body = await req.body;  
-        console.log(body);
+        console.log(typeof(body));
         const data = JSON.parse(body);
         console.log(data);
         console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus)

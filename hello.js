@@ -2,8 +2,7 @@ import bot from "./bot.js";
 
 const generateMenu = async () => {
     try {
-        delete require.cache[require.resolve('./coursesList.js')];  // Очистити кеш
-        const { courses } = await import('./coursesList.js');
+        const { courses } = await import(`./coursesList.js?t=${Date.now()}`);
         const menu = courses.map(course => [
             { text: course.text, callback_data: course.callback }
         ]);

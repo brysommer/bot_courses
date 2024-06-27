@@ -9,7 +9,7 @@ const server = () => {
     const app = e();
     const port = 3000;
 
-  //  app.use(e.json()) // for parsing application/json
+    app.use(e.json()) // for parsing application/json
     app.use(e.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
     app.get('/', (req, res) => {
@@ -19,9 +19,7 @@ const server = () => {
     app.post('/webhook', async (req, res) => {
 
 
-        const body = await req.body;  
-        console.log(body);
-        const data = JSON.parse(body);
+        const data = req.body;  
         console.log(data);
         console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus)
 

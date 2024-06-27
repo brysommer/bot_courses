@@ -19,7 +19,13 @@ const server = () => {
     app.post('/webhook', async (req, res) => {
 
 
-        const data = req.body;  
+        const outerData = req.body;
+        
+        // Витягніть ключ (який є JSON рядком) з зовнішнього об'єкта
+        const outerKey = Object.keys(outerData)[0];
+
+        // Перетворіть цей ключ назад в об'єкт
+        const data = JSON.parse(outerKey);  
         console.log(data);
         console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus)
 

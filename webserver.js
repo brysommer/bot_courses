@@ -81,7 +81,7 @@ const server = () => {
                 const content = await findContentByCourse(courseName);
                 console.log(content);
 
-                for (el of content) {
+                for (const el of content) {
                     bot.sendVideo(chatId, el.media, { caption: el.text })
                 }
                 /*

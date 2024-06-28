@@ -20,7 +20,7 @@ const server = () => {
 
         const text = req.body;
         
-        const { data } = text;
+        const data = JSON.parse(text);
 
         console.log(data);
         console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus)

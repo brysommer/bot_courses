@@ -3,6 +3,19 @@ import values from "./values.js";
 import * as crypto from 'crypto';
 import { createNewPurchaseByChatId } from "./models/purchases.js";
 import bodyParser from "body-parser";
+import bot from "./bot.js";
+import { findContentByCourse } from "./models/content.js";
+
+const sortByLastElement = (array) => {
+    return array.sort((a, b) => {
+        // Отримуємо останні елементи підмасивів
+        const lastElementA = parseFloat(a[a.length - 1]);
+        const lastElementB = parseFloat(b[b.length - 1]);
+
+        // Порівнюємо ці елементи
+        return lastElementA - lastElementB;
+    });
+};
 
 
 const server = () => {
@@ -64,6 +77,15 @@ const server = () => {
                 // Create purchase
                 console.log(chatId, courseName);
                 await createNewPurchaseByChatId(chatId, courseName);
+
+                const content = findContentByCourse(courseName);
+                console.log(content);
+
+                const sortedArrays = sortByLastElement(content);
+
+                console.log(sortedArrays);
+
+
             } else {
                 return res.status(200).json('Webhook Error: Unhandled event type');
             }

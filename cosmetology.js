@@ -8,23 +8,60 @@ const cosmetology = () => {
         const chatId = query.message.chat.id;
 
         if (action === 'cosmetology') {
-            bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі Косметологія, тут ви можете вибрати курс.', { 
+            bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі Косметологія, тут ви можете вибрати підрозділ.', { 
                 reply_markup: {
                     inline_keyboard: [
-                        [{ text: 'Сучасні методи антивікової терапії', callback_data: 'cosmetology_detals' }],
-                        [{ text: 'Догляд за шкірою обличчя', callback_data: 'cosmetology_detals' }],
-                        [{ text: 'Технології апаратного обличчя та тіла', callback_data: 'cosmetology_detals' }]
+                        [{ text: 'Апаратні методики', callback_data: 'devicecosm' }],
+                        [{ text: 'Інʼєкційна косметологія. Філери.  Контурна пластика', callback_data: 'injections' }],
+                        [{ text: 'Естетична косметологія', callback_data: 'ethteticcosm' }]
                     ]
                 } 
             })
         }
 
-        if (action === 'cosmetology_detals') {
+        switch (action) {
+            case 'devicecosm':
+                bot.sendMessage(chatId, 'Зараз ви знаходитися в підрозділі Апаратні методики, тут ви можете вибрати курс.', { 
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: 'Апаратні методики коррекції вікових змін. Розацеа. Гіперпігментація. Видалення тату. Лазерне шліфування. IPL', callback_data: 'cosm 1' }],
+                        ]
+                    } 
+                })
+            break;
+            case 'injections':
+                bot.sendMessage(chatId, 'Зараз ви знаходитися в підрозділі Інʼєкційна косметологія. Філери.  Контурна пластика, тут ви можете вибрати курс.', { 
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: 'Назва: "Lips for kiss" . Збільшення губ в авторській методиці', callback_data: 'cosm 2' }],
+                            [{ text: 'Вардугіна. Збільшення губ в авторській методиці.', callback_data: 'cosm 3' }],
+                            [{ text: 'Корекція філерами носослізної борозди', callback_data: 'cosm 4' }]
+                        ]
+                    } 
+                })
+            break;
+            case 'ethteticcosm':
+                bot.sendMessage(chatId, 'Зараз ви знаходитися в підрозділі Естетична косметологія, тут ви можете вибрати курс.', { 
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: 'Авторська школа пілінгів', callback_data: 'cosm 5' }],
+                        ]
+                    } 
+                })
+            break;
+        }
+
+        const courseNumber = action.split(' ')
+
+        if (courseNumber[0] === 'cosm') {
+            
+            const cousrePrice = 3;
+
             const session = await wfp.createInvoiceUrl({
                 orderReference: (Math.random() * 1e17).toString(),
-                productName: ['Косметологія' + ',' + chatId],
+                productName: [action + ',' + chatId],
                 productCount: [1],
-                productPrice: [3],
+                productPrice: [cousrePrice],
             });
             
             console.log(session.value?.invoiceUrl)
@@ -37,13 +74,12 @@ const cosmetology = () => {
 5. Біологічні та генетичні аспекти антивікових стратегій`, { 
                 reply_markup: {
                     inline_keyboard: [
-                        [{ text: 'Оплатити', url: session.value?.invoiceUrl }],
+                        [{ text: 'Оплатити' + cousrePrice + 'грн', url: session.value?.invoiceUrl }],
                       
                     ]
                 }}
             );
 
-            bot.sendVideo(chatId, 'BAACAgIAAyEFAASBiWGlAAMMZnrHwQri1feHJfMrsLC7Kviq7ogAAsVUAAKhg9BLkbwKoU1R27E1BA')
         };
 
 

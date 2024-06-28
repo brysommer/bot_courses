@@ -11,7 +11,8 @@ const returnVideoId = () => {
 
     bot.on('channel_post', (msg) => {
         console.log(msg)
-        if (msg.chat.id.toString() === values.logger_id && msg.video) {
+        console.log(msg.video.file_id)
+        if (msg.video) {
             const videoId = msg.video.file_id;
             bot.sendMessage(values.logger_id, `Video ID: ${videoId}`);
         }

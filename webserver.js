@@ -21,10 +21,15 @@ const server = () => {
 
 
         const text = req.body;
-        
-        const data = text;
-
-        console.log(data);
+            console.log("Received raw body:", text);
+            
+            // Якщо text виглядає як JSON-рядок, розбираємо його
+            const data = typeof text === 'string' ? JSON.parse(text) : text;
+            console.log("Parsed data:", data);
+            
+            if (typeof data !== 'object') {
+                throw new Error('Parsed data is not an object');
+            }
         console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus)
 
         const forHash = [

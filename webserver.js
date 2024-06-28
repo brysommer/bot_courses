@@ -10,7 +10,6 @@ const server = () => {
     const port = 3000;
 
     app.use(e.json()) // for parsing application/json
-    app.use(e.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
     app.get('/', (req, res) => {
         res.send('Hello World!')
@@ -19,13 +18,10 @@ const server = () => {
     app.post('/webhook', async (req, res) => {
 
 
-        const outerData = req.body;
+        const text = req.body;
         
-        // Витягніть ключ (який є JSON рядком) з зовнішнього об'єкта
-        const outerKey = Object.keys(outerData)[0];
+        const data = text;
 
-        // Перетворіть цей ключ назад в об'єкт
-        const data = JSON.parse(outerKey);  
         console.log(data);
         console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus)
 

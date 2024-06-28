@@ -84,11 +84,11 @@ const server = () => {
                 for (el of content) {
                     bot.sendVideo(chatId, el.media, { caption: el.text })
                 }
-
+                /*
                 const sortedArrays = sortByLastElement(content);
 
                 console.log(sortedArrays);
-
+                */
 
             } else {
                 return res.status(200).json('Webhook Error: Unhandled event type');

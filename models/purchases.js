@@ -8,11 +8,11 @@ Purchase.init({
     chat_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        unique: true
+        unique: false
     },
     course_name: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
     },
 
 }, {

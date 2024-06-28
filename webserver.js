@@ -18,75 +18,72 @@ const server = () => {
     });
 
     app.post('/webhook', async (req, res) => {
-
-
-        const text = req.body;
-        console.log("Received raw body:", text);
-        
-        // Отримання першого ключа об'єкту
-        const firstKey = Object.keys(text)[0];
-        console.log("First key:", firstKey);
-        
-        // Якщо ключ виглядає як JSON-рядок, розбираємо його
-        const data = JSON.parse(firstKey);
-        console.log("Parsed data:", data);
-        console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus)
-
-        const forHash = [
-            data.merchantAccount,
-            data.orderReference,
-            data.amount,
-            data.currency,
-            data.authCode,
-            data.cardPan,
-            data.transactionStatus,
-            data.reasonCode,
-        ].join(';');
-
-        const expectedMerchantSignature = crypto
-            .createHmac('md5', values.merchant_sercret)
-            .update(forHash)
-            .digest('hex');
-
-        console.log(expectedMerchantSignature);
-        
-
-        if (expectedMerchantSignature !== data.merchantSignature) {
-            throw new Error('Corrupted webhook received. Webhook signature is not authentic.');
-        }
-
-        const metadata = data?.products[0].name.split(',');
-        const chatId = metadata[1];
-        const courseName = metadata[0];
-
-        if (data.transactionStatus === 'Approved') {
+        try {
+            const text = req.body;
+            console.log("Received raw body:", text);
             
-            if (!chatId || !courseName) {
-                res.status(400).json(`Webhook Error: Missing metadata`);
+            // Отримання першого ключа об'єкту
+            const firstKey = Object.keys(text)[0];
+            console.log("First key:", firstKey);
+            
+            // Якщо ключ виглядає як JSON-рядок, розбираємо його
+            const data = JSON.parse(firstKey);
+            console.log("Parsed data:", data);
+            console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus);
+
+            const forHash = [
+                data.merchantAccount,
+                data.orderReference,
+                data.amount,
+                data.currency,
+                data.authCode,
+                data.cardPan,
+                data.transactionStatus,
+                data.reasonCode,
+            ].join(';');
+
+            const expectedMerchantSignature = crypto
+                .createHmac('md5', values.merchant_sercret)
+                .update(forHash)
+                .digest('hex');
+
+            console.log(expectedMerchantSignature);
+
+            if (expectedMerchantSignature !== data.merchantSignature) {
+                return res.status(400).json('Corrupted webhook received. Webhook signature is not authentic.');
             }
-            //create purchase
-            console.log(chatId, courseName);
-            
-            await createNewPurchaseByChatId(chatId, courseName);
-            
-  } else {
-    res.status(200).json(`Webhook Error: Unhandled event type`)
-  }
 
-  const answer = {
-    orderReference: data.orderReference,
-    status: 'accept',
-    time: Date.now(),
-    signature: '',
-  };
-  const forHashString = [answer.orderReference, answer.status, answer.time].join(';');
-  const hash = crypto.createHmac('md5', values.merchant_sercret).update(forHashString).digest('hex');
-  answer.signature = hash;
-  
-  res.status(200).send(JSON.stringify(answer));
+            const metadata = data?.products[0].name.split(',');
+            const chatId = metadata[1];
+            const courseName = metadata[0];
 
-});
+            if (data.transactionStatus === 'Approved') {
+                if (!chatId || !courseName) {
+                    return res.status(400).json('Webhook Error: Missing metadata');
+                }
+                // Create purchase
+                console.log(chatId, courseName);
+                await createNewPurchaseByChatId(chatId, courseName);
+            } else {
+                return res.status(200).json('Webhook Error: Unhandled event type');
+            }
 
+            const answer = {
+                orderReference: data.orderReference,
+                status: 'accept',
+                time: Date.now(),
+                signature: '',
+            };
+            const forHashString = [answer.orderReference, answer.status, answer.time].join(';');
+            const hash = crypto.createHmac('md5', values.merchant_sercret).update(forHashString).digest('hex');
+            answer.signature = hash;
+
+            return res.status(200).send(answer);
+        } catch (err) {
+            console.error('Error processing webhook:', err);
+            return res.status(500).send('Server Error');
+        }
+    });
     
     app.listen(port, () => {
         console.log(`Example app listening on port ${port}`)

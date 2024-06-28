@@ -81,6 +81,10 @@ const server = () => {
                 const content = await findContentByCourse(courseName);
                 console.log(content);
 
+                for (el of content) {
+                    bot.sendVideo(chatId, el.media, { caption: el.text })
+                }
+
                 const sortedArrays = sortByLastElement(content);
 
                 console.log(sortedArrays);

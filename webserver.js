@@ -78,7 +78,7 @@ const server = () => {
                 console.log(chatId, courseName);
                 await createNewPurchaseByChatId(chatId, courseName);
 
-                const content = findContentByCourse(courseName);
+                const content = await findContentByCourse(courseName);
                 console.log(content);
 
                 const sortedArrays = sortByLastElement(content);

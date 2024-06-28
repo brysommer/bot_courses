@@ -2,6 +2,7 @@ import e from "express";
 import values from "./values.js";
 import * as crypto from 'crypto';
 import { createNewPurchaseByChatId } from "./models/purchases.js";
+import bodyParser from "body-parser";
 
 
 const server = () => {
@@ -9,7 +10,8 @@ const server = () => {
     const app = e();
     const port = 3000;
 
-    app.use(e.json()) // for parsing application/json
+    app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({ extended: false }))
 
     app.get('/', (req, res) => {
         res.send('Hello World!')
@@ -20,7 +22,7 @@ const server = () => {
 
         const text = req.body;
         
-        const data = JSON.parse(text);
+        const data = text;
 
         console.log(data);
         console.log(data.merchantAccount, data.merchantSignature, data.amount, data.transactionStatus)

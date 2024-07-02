@@ -67,7 +67,7 @@ const cosmetology = () => {
 
             const course = await findCourseByCourse(action);
 
-            const url = await sessionCreate(course.price/100, course.course_name, chatId);
+            const url = await sessionCreate(course.price/100, course.course, chatId);
             sendPaymantButton(course.course_name, url, course.price, chatId);
             
         };

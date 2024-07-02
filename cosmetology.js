@@ -1,7 +1,17 @@
 import bot from "./bot.js";
-import { wfp } from "./wfpinit.js";
+import { sessionCreate } from "./wfpinit.js";
+import { findCourseByCourse } from "./models/courses.js";
 
-const cosmetology = () => {    
+const cosmetology = () => {
+    const sendPaymantButton = (courseName, url, coursePrice, chatId) => {
+        bot.sendMessage(chatId, `Ви купуєте курс ${courseName}`, { 
+            reply_markup: {
+                inline_keyboard: [
+                    [{ text: 'Оплатити ' + coursePrice + ' грн', url: url }],
+                ]
+            }}
+        );
+    }
 
     bot.on("callback_query", async (query) => {
         const action = query.data;
@@ -54,38 +64,13 @@ const cosmetology = () => {
         const courseNumber = action.split(' ')
 
         if (courseNumber[0] === 'cosm') {
+
+            const course = await findCourseByCourse(action);
+
+            const url = await sessionCreate(course.price/100, course.course_name, chatId);
+            sendPaymantButton(course.course_name, url, course.price, chatId);
             
-            const cousrePrice = 3;
-
-            const session = await wfp.createInvoiceUrl({
-                orderReference: (Math.random() * 1e17).toString(),
-                productName: [action + ',' + chatId],
-                productCount: [1],
-                productPrice: [cousrePrice],
-            });
-            
-            console.log(session.value?.invoiceUrl)
-
-            bot.sendMessage(chatId, `
-1. Основи антивікової терапії: концепції та підходи
-2. Сучасні методи діагностики та моніторингу старіння
-3. Гормональна терапія та її роль в уповільненні старіння
-4. Інноваційні технології в антивіковій медицині
-5. Біологічні та генетичні аспекти антивікових стратегій`, { 
-                reply_markup: {
-                    inline_keyboard: [
-                        [{ text: 'Оплатити' + cousrePrice + 'грн', url: session.value?.invoiceUrl }],
-                      
-                    ]
-                }}
-            );
-
         };
-
-
-
-
-
     })
 
 }

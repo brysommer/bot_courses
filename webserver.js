@@ -82,7 +82,7 @@ const server = () => {
                 console.log(content);
 
                 for (const el of content) {
-                    bot.sendVideo(chatId, el.media, { caption: el.text })
+                    bot.sendDocument(chatId, el.media, { caption: el.text })
                 }
                 /*
                 const sortedArrays = sortByLastElement(content);

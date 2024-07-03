@@ -82,6 +82,10 @@ const server = () => {
                 console.log(content);
 
                 for (const el of content) {
+                    if (el.type === 'photo') {
+                        bot.sendPhoto(chatId, el.media, { caption: el.text });
+                        continue;
+                    }
                     bot.sendDocument(chatId, el.media, { caption: el.text })
                 }
                 /*

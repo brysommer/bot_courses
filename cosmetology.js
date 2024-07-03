@@ -45,7 +45,10 @@ const cosmetology = () => {
                         inline_keyboard: [
                             [{ text: 'Назва: "Lips for kiss" . Збільшення губ в авторській методиці', callback_data: 'cosm 2' }],
                             [{ text: 'Вардугіна. Збільшення губ в авторській методиці.', callback_data: 'cosm 3' }],
-                            [{ text: 'Корекція філерами носослізної борозди', callback_data: 'cosm 4' }]
+                            [{ text: 'Корекція філерами носослізної борозди', callback_data: 'cosm 4' }],
+                            [{ text: 'Саромыцкая Ботулинотерапия.', callback_data: 'cosm 6' }],
+                            [{ text: 'Курс «Полімолочна кислота. Теорія та практика. Колагеновий  ліфтинг»', callback_data: 'cosm 7' }],
+                            [{ text: '«Косметолог на мільйон. Ольга Барановська. Всі процедури та їх продаж»', callback_data: 'cosm 8' }]
                         ]
                     } 
                 })
@@ -67,7 +70,7 @@ const cosmetology = () => {
 
             const course = await findCourseByCourse(action);
 
-            const url = await sessionCreate(course.price/100, course.course, chatId);
+            const url = await sessionCreate(course.price, course.course, chatId);
             sendPaymantButton(course.course_name, url, course.price, chatId);
             
         };

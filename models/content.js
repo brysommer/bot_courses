@@ -6,7 +6,7 @@ import { logger } from '../logger/index.js';
 class Content extends Model {}
 Content.init({
     media: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING, 
         allowNull: false,
         unique: false
     },
@@ -22,6 +22,10 @@ Content.init({
         type: DataTypes.STRING,
         allowNull: true
     },
+    type: {
+        type: DataTypes.STRING,
+        allowNull: true
+    }
 
 }, {
     freezeTableName: false,

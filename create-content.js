@@ -8,10 +8,11 @@ const processCreateContent = async (coursesText, chatId) => {
         const text = lines[1];
         const course = lines[2];
         const serial = lines[3];
+        const type = lines[4];
 
         console.log(lines)
                 
-        const result = await createContent({media, text, course, serial});
+        const result = await createContent({media, text, course, serial, type});
 
         bot.sendMessage(chatId, JSON.stringify(result))
         

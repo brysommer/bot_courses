@@ -83,10 +83,10 @@ const server = () => {
 
                 for (const el of content) {
                     if (el.type === 'photo') {
-                        bot.sendPhoto(chatId, el.media, { caption: el.text });
+                        await bot.sendPhoto(chatId, el.media, { caption: el.text });
                         continue;
                     }
-                    bot.sendDocument(chatId, el.media, { caption: el.text })
+                    await bot.sendDocument(chatId, el.media, { caption: el.text })
                 }
                 /*
                 const sortedArrays = sortByLastElement(content);

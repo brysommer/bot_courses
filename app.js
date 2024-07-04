@@ -5,6 +5,9 @@ import returnVideoId from "./vide-file-if.js";
 import { createCoursesList } from "./create-courses-list.js";
 import createCourses from "./create-courses.js";
 import createContentByTG from "./create-content.js";
+import makeup from "./makeup.js";
+import smm from "./smm.js";
+import sport from "./sport.js";
 
 
 
@@ -15,3 +18,6 @@ returnVideoId();
 createCoursesList();
 createCourses();
 createContentByTG();
+makeup();
+smm();
+sport();

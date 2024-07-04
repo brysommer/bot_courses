@@ -16,7 +16,7 @@ const sessionCreate = async (price, courseName, chatId) => {
         orderReference: (Math.random() * 1e17).toString(),
         productName: [courseName + ',' + chatId],
         productCount: [1],
-        productPrice: [price],
+        productPrice: [price/100],
     });
 
     return session.value?.invoiceUrl;

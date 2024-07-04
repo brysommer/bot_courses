@@ -16,6 +16,12 @@ const generateMenu = async () => {
 };
 
 const hello = () => {
+    bot.setMyCommands([
+        {command: '/start', description: 'Почати спочатку'},
+        {command: '/rules', description: 'Регламент надання товару після покупки, правила повернення'},
+        {command: '/support', description: 'Звязок з підтримкою'},
+      ]);
+    
     bot.on('message', async (msg) => {
         const chatId = msg.chat.id;
         switch (msg.text) {

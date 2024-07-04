@@ -11,7 +11,7 @@ const cosmetology = () => {
                 ]
             }}
         );
-    }
+    };
 
     bot.on("callback_query", async (query) => {
         const action = query.data;
@@ -48,7 +48,8 @@ const cosmetology = () => {
                             [{ text: 'Корекція філерами носослізної борозди', callback_data: 'cosm 4' }],
                             [{ text: 'Саромыцкая Ботулинотерапия.', callback_data: 'cosm 6' }],
                             [{ text: 'Курс «Полімолочна кислота. Теорія та практика. Колагеновий  ліфтинг»', callback_data: 'cosm 7' }],
-                            [{ text: '«Косметолог на мільйон. Ольга Барановська. Всі процедури та їх продаж»', callback_data: 'cosm 8' }]
+                            [{ text: '«Косметолог на мільйон. Ольга Барановська. Всі процедури та їх продаж»', callback_data: 'cosm 8' }],
+                            [{ text: '"Полімолочна кислота. Школа Лєщової"', callback_data: 'cosm 9' }]
                         ]
                     } 
                 })

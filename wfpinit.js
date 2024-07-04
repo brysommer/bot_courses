@@ -4,7 +4,7 @@ import values from './values.js';
 WFP_CONFIG.DEFAULT_PAYMENT_CURRENCY = 'UAH';
 
 const wfp = new WFP({
-    MERCHANT_ACCOUNT: 'itgin_online',
+    MERCHANT_ACCOUNT: 't_me_03148',
     MERCHANT_SECRET_KEY: values.merchant_sercret,
     MERCHANT_DOMAIN_NAME: '51.20.1.118:3000',
     // service URL needed to receive webhooks
@@ -16,7 +16,7 @@ const sessionCreate = async (price, courseName, chatId) => {
         orderReference: (Math.random() * 1e17).toString(),
         productName: [courseName + ',' + chatId],
         productCount: [1],
-        productPrice: [price/100],
+        productPrice: [price],
     });
 
     return session.value?.invoiceUrl;

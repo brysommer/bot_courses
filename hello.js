@@ -29,17 +29,7 @@ const hello = () => {
             case '/start':
                 const menu = await generateMenu();
 
-                const content = await findContentByCourse('Sport 1');
-                console.log(content);
-
-                for (const el of content) {
-                    if (el.type === 'photo') {
-                        bot.sendPhoto(chatId, el.media, { caption: el.text });
-                        continue;
-                    }
-                    bot.sendDocument(chatId, el.media, { caption: el.text })
-                }
-                
+                                
                 bot.sendMessage(chatId, 'Ви зараз знаходитися в боті, який надає доступ до навчальних курсів, будьласка виберіть за яким напрямком ви хочете навчатися:', { 
                     reply_markup: {
                         inline_keyboard: menu

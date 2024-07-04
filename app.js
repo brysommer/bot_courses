@@ -8,6 +8,7 @@ import createContentByTG from "./create-content.js";
 import makeup from "./makeup.js";
 import smm from "./smm.js";
 import sport from "./sport.js";
+import psy from "./psy.js";
 
 
 
@@ -21,3 +22,4 @@ createContentByTG();
 makeup();
 smm();
 sport();
+psy();

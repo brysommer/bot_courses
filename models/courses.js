@@ -57,8 +57,23 @@ const findCourseByCourse = async (course) => {
     return res;
 };
 
+const findCourseBySubPart = async (sub_part) => {
+    console.log(sub_part)
+    const res = await Courses.findAll({ where: { sub_part } });
+    if (res.length > 0) return res.map(el => el.dataValues);
+    return;    
+};
+
+const deleteCourseByCourse = async (course) => {
+    const res = await Courses.destroy({ where: { course } });
+    if (res) logger.info(`Deleted status: ${res}. Course id ${course}`);
+    return res ? true : false;
+};
+
 export {
     Courses,
     createCourse,
     findCourseByCourse,
+    deleteCourseByCourse,
+    findCourseBySubPart
 };   

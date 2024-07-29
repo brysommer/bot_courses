@@ -1,6 +1,7 @@
 import bot from "./bot.js";
 import { sessionCreate } from "./wfpinit.js";
-import { findCourseByCourse } from "./models/courses.js";
+import { findCourseByCourse, findCourseBySubPart } from "./models/courses.js";
+import generateMenu from "./generateMenu.js";
 
 const cosmetology = () => {
     const sendPaymantButton = (courseName, url, coursePrice, chatId) => {
@@ -18,6 +19,7 @@ const cosmetology = () => {
         const chatId = query.message.chat.id;
 
         if (action === 'cosmetology') {
+                        
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі Косметологія, тут ви можете вибрати підрозділ.', { 
                 reply_markup: {
                     inline_keyboard: [
@@ -27,40 +29,32 @@ const cosmetology = () => {
                     ]
                 } 
             })
+            
         }
 
         switch (action) {
             case 'devicecosm':
+
+                                
                 bot.sendMessage(chatId, 'Зараз ви знаходитися в підрозділі Апаратні методики, тут ви можете вибрати курс.', { 
                     reply_markup: {
-                        inline_keyboard: [
-                            [{ text: 'Апаратні методики коррекції вікових змін. Розацеа. Гіперпігментація. Видалення тату. Лазерне шліфування. IPL', callback_data: 'cosm 1' }],
-                        ]
+                        inline_keyboard: await generateMenu('Апаратні методики')
                     } 
-                })
+                });
             break;
             case 'injections':
                 bot.sendMessage(chatId, 'Зараз ви знаходитися в підрозділі Інʼєкційна косметологія. Філери.  Контурна пластика, тут ви можете вибрати курс.', { 
                     reply_markup: {
-                        inline_keyboard: [
-                            [{ text: 'Назва: "Lips for kiss" . Збільшення губ в авторській методиці', callback_data: 'cosm 2' }],
-                            [{ text: 'Вардугіна. Збільшення губ в авторській методиці.', callback_data: 'cosm 3' }],
-                            [{ text: 'Корекція філерами носослізної борозди', callback_data: 'cosm 4' }],
-                            [{ text: 'Саромыцкая Ботулинотерапия.', callback_data: 'cosm 6' }],
-                            [{ text: 'Курс «Полімолочна кислота. Теорія та практика. Колагеновий  ліфтинг»', callback_data: 'cosm 7' }],
-                            [{ text: 'Объемное моделирование углов нижней челюсти. dr.julia_cos', callback_data: 'cosm 8' }],
-                        ]
+                        inline_keyboard: await generateMenu('Інʼєкційна косметологія. Філери.  Контурна пластика')
                     } 
-                })
+                });
             break;
             case 'ethteticcosm':
                 bot.sendMessage(chatId, 'Зараз ви знаходитися в підрозділі Естетична косметологія, тут ви можете вибрати курс.', { 
                     reply_markup: {
-                        inline_keyboard: [
-                            [{ text: 'Авторська школа пілінгів', callback_data: 'cosm 5' }],
-                        ]
+                        inline_keyboard: await generateMenu('Естетична косметологія')
                     } 
-                })
+                });
             break;
         }
 
@@ -68,10 +62,12 @@ const cosmetology = () => {
 
         if (courseNumber[0] === 'cosm') {
 
+            
             const course = await findCourseByCourse(action);
-
-            const url = await sessionCreate(course.price, course.course, chatId);
-            sendPaymantButton(course.course_name, url, course.price, chatId);
+            console.log(course)
+            
+            const url = await sessionCreate(course?.price, course?.course, chatId);
+            sendPaymantButton(course?.course_name, url, course?.price, chatId);
             
         };
     })

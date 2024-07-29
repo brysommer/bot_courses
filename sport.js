@@ -1,6 +1,7 @@
 import bot from "./bot.js";
 import { sessionCreate } from "./wfpinit.js";
 import { findCourseByCourse } from "./models/courses.js";
+import generateMenu from "./generateMenu.js";
 
 const sport = () => {
     const sendPaymantButton = (courseName, url, coursePrice, chatId) => {
@@ -20,11 +21,10 @@ const sport = () => {
         if (action === 'Sport') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі Курси смм, тут ви можете вибрати підрозділ.', { 
                 reply_markup: {
-                    inline_keyboard: [
-                        [{ text: 'ШпакМетод . Бодифлекс.', callback_data: 'Sport 1' }],
-                    ]
+                    inline_keyboard: generateMenu('Спорт')
                 } 
             })
+            return;
         }
 
         const courseNumber = action.split(' ')
@@ -33,8 +33,8 @@ const sport = () => {
 
             const course = await findCourseByCourse(action);
 
-            const url = await sessionCreate(course.price, course.course, chatId);
-            sendPaymantButton(course.course_name, url, course.price, chatId);
+            const url = await sessionCreate(course?.price, course?.course, chatId);
+            sendPaymantButton(course?.course_name, url, course?.price, chatId);
             
         };
     })

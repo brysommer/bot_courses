@@ -1,6 +1,7 @@
 import bot from "./bot.js";
 import { sessionCreate } from "./wfpinit.js";
 import { findCourseByCourse } from "./models/courses.js";
+import generateMenu from "./generateMenu.js";
 
 const psy = () => {
     const sendPaymantButton = (courseName, url, coursePrice, chatId) => {
@@ -11,6 +12,7 @@ const psy = () => {
                 ]
             }}
         );
+        return;
     };
 
     bot.on("callback_query", async (query) => {
@@ -20,9 +22,7 @@ const psy = () => {
         if (action === 'psy') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі Курси смм, тут ви можете вибрати підрозділ.', { 
                 reply_markup: {
-                    inline_keyboard: [
-                        [{ text: '«Соколовська . Шлях до ярду»', callback_data: 'psy 1' }],
-                    ]
+                    inline_keyboard: generateMenu('Психологія. Особисте зростання та саморозвиток. Мотивація')
                 } 
             })
         }
@@ -33,8 +33,8 @@ const psy = () => {
 
             const course = await findCourseByCourse(action);
 
-            const url = await sessionCreate(course.price, course.course, chatId);
-            sendPaymantButton(course.course_name, url, course.price, chatId);
+            const url = await sessionCreate(course?.price, course?.course, chatId);
+            sendPaymantButton(course?.course_name, url, course?.price, chatId);
             
         };
     })

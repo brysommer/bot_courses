@@ -18,7 +18,7 @@ const sessionCreate = async (price, courseName, chatId) => {
         productCount: [1],
         productPrice: [price],
     });
-
+    console.log(session)
     return session.value?.invoiceUrl;
 }
 

@@ -1,5 +1,5 @@
 import bot from './bot.js';
-import { createCourse } from './models/courses.js';
+import { createCourse, deleteCourseByCourse } from './models/courses.js';
 
 const processCreateCourse = async (text, chatId) => {
     try {
@@ -22,6 +22,19 @@ const processCreateCourse = async (text, chatId) => {
     }
 };
 
+const processDeleteCourse = async (text, chatId) => {
+    try {
+                             
+        const result = await deleteCourseByCourse(text);
+
+        bot.sendMessage(chatId, JSON.stringify(result))
+        
+    } catch (err) {
+        bot.sendMessage(chatId, 'Помилка при обробці тексту.');
+        console.error(err);
+    }
+};
+
 
 export const createCourses = () =>{
     bot.on('message', (msg) => {
@@ -31,6 +44,9 @@ export const createCourses = () =>{
         if (text.startsWith('_ccourse')) {
             const coursesText = text.replace('_ccourse', '').trim();
             processCreateCourse(coursesText, chatId);
+        } else if (text.startsWith('_dcourse')) {
+            const coursesText = text.replace('_dcourse', '').trim();
+            processDeleteCourse(coursesText, chatId);
         }
     });
     

@@ -20,7 +20,7 @@ const psy = () => {
         const chatId = query.message.chat.id;
 
         if (action === 'psy') {
-            bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі Курси смм, тут ви можете вибрати підрозділ.', { 
+            bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі Психологія. Особисте зростання та саморозвиток. Мотивація', { 
                 reply_markup: {
                     inline_keyboard: generateMenu('Психологія. Особисте зростання та саморозвиток. Мотивація')
                 } 

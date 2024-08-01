@@ -20,7 +20,7 @@ const makeup = () => {
         const chatId = query.message.chat.id;
         
         if (action === 'makeup') {
-            bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі Курс візаж, тут ви можете вибрати підрозділ.', { 
+            bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі Курс візаж', { 
                 reply_markup: {
                     inline_keyboard: await generateMenu('Курс візаж')
                 } 

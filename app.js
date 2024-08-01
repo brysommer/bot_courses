@@ -9,7 +9,19 @@ import makeup from "./makeup.js";
 import smm from "./smm.js";
 import sport from "./sport.js";
 import psy from "./psy.js";
-
+import manik from "./manik.js";
+import permanent from "./permanent.js";
+import biznes from "./biznes.js";
+import coding from "./coding.js";
+import scripts from "./scripts.js";
+import photo from "./photo.js";
+import devops from "./devops.js";
+import gpt from "./gpt.js";
+import lenguage from "./lenguage.js";
+import ezoteric from "./ezoteric.js";
+import design from "./design.js";
+import hobby from "./hobby.js";
+import cooking from "./cooking.js";
 
 
 hello();
@@ -23,3 +35,17 @@ makeup();
 smm();
 sport();
 psy();
+manik();
+permanent();
+biznes();
+coding();
+scripts();
+
+photo();
+devops();
+gpt();
+lenguage();
+ezoteric();
+design();
+hobby();
+cooking();

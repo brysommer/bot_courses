@@ -3,7 +3,7 @@ import { sessionCreate } from "./wfpinit.js";
 import { findCourseByCourse } from "./models/courses.js";
 import generateMenu from "./generateMenu.js";
 
-const sport = () => {
+const lenguage = () => {
     const sendPaymantButton = (courseName, url, coursePrice, chatId) => {
         bot.sendMessage(chatId, `Ви купуєте курс ${courseName}`, { 
             reply_markup: {
@@ -18,10 +18,10 @@ const sport = () => {
         const action = query.data;
         const chatId = query.message.chat.id;
 
-        if (action === 'Sport') {
-            bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "спорт"', { 
+        if (action === 'lenguage') {
+            bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Іноземні мови"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Спорт')
+                    inline_keyboard: generateMenu('Іноземні мови')
                 } 
             })
             return;
@@ -29,7 +29,7 @@ const sport = () => {
 
         const courseNumber = action.split(' ')
 
-        if (courseNumber[0] === 'Sport') {
+        if (courseNumber[0] === 'lenguage') {
 
             const course = await findCourseByCourse(action);
 
@@ -41,4 +41,4 @@ const sport = () => {
 
 }
 
-export default sport;
+export default lenguage;

@@ -28,14 +28,6 @@ export const courses = [
     "callback": "scripts"
   },
   {
-    "text": "Курси з СММ",
-    "callback": "smm"
-  },
-  {
-    "text": "Відеозйомка. Обробка фото.",
-    "callback": "photo"
-  },
-  {
     "text": "Програмування та Адміністрація",
     "callback": "devops"
   },

@@ -21,7 +21,7 @@ const smm = () => {
         if (action === 'smm') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі Курси смм, тут ви можете вибрати підрозділ.', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Курси смм')
+                    inline_keyboard: await generateMenu('Курси смм')
                 } 
             });
             return;

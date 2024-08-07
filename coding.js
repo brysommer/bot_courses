@@ -21,7 +21,7 @@ const coding = () => {
         if (action === 'coding') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Створення сайту. Ботів"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Створення сайту. Ботів')
+                    inline_keyboard: await generateMenu('Створення сайту. Ботів')
                 } 
             })
             return;

@@ -23,6 +23,22 @@ const hello = () => {
         {command: '/support', description: 'Звязок з підтримкою'},
       ]);
     
+    bot.on('callback_query', async (query) => {
+        const action = query.data;
+        const chatId = query.message.chat.id;
+
+        if (action === 'start') {
+            const menu = await generateMenu();
+
+                                
+                bot.sendMessage(chatId, 'Ви зараз знаходитися в боті, який надає доступ до навчальних курсів, будьласка виберіть за яким напрямком ви хочете навчатися:', { 
+                    reply_markup: {
+                        inline_keyboard: menu
+                    } 
+                });
+        }
+})
+
     bot.on('message', async (msg) => {
         const chatId = msg.chat.id;
         switch (msg.text) {

@@ -21,7 +21,7 @@ const lenguage = () => {
         if (action === 'lenguage') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Іноземні мови"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Іноземні мови')
+                    inline_keyboard: await generateMenu('Іноземні мови')
                 } 
             })
             return;

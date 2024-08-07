@@ -21,7 +21,7 @@ const sport = () => {
         if (action === 'Sport') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "спорт"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Спорт')
+                    inline_keyboard: await generateMenu('Спорт')
                 } 
             })
             return;

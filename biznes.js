@@ -21,7 +21,7 @@ const biznes = () => {
         if (action === 'biznes') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Бізнес. Запуск продажів"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Бізнес. Запуск продажів')
+                    inline_keyboard: await  generateMenu('Бізнес. Запуск продажів')
                 } 
             })
             return;

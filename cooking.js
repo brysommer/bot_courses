@@ -21,7 +21,7 @@ const cooking = () => {
         if (action === 'cooking') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Кулінарія"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Кулінарія')
+                    inline_keyboard: await generateMenu('Кулінарія')
                 } 
             })
             return;

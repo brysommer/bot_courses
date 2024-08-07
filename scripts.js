@@ -21,7 +21,7 @@ const scripts = () => {
         if (action === 'scripts') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Скрипти. Розсилки"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Скрипти. Розсилки')
+                    inline_keyboard: await generateMenu('Скрипти. Розсилки')
                 } 
             })
             return;

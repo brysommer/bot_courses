@@ -1,4 +1,4 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, Op } from "sequelize";
 import { sequelize } from './sequelize.js';
 import { logger } from '../logger/index.js';
 
@@ -57,9 +57,17 @@ const findCourseByCourse = async (course) => {
     return res;
 };
 
-const findCourseBySubPart = async (sub_part) => {
-    console.log(sub_part)
-    const res = await Courses.findAll({ where: { sub_part } });
+const findCourseBySubPart = async (value) => {
+
+    const res = await Courses.findAll({ where: 
+        { 
+            sub_part: 
+                {
+                    [Op.like]: `%${value}%`
+                } 
+        }
+    });
+
     if (res.length > 0) return res.map(el => el.dataValues);
     return;    
 };
@@ -70,10 +78,29 @@ const deleteCourseByCourse = async (course) => {
     return res ? true : false;
 };
 
+const editPriceByCourse = async (course, price) => {
+    const res = await Courses.update({ price } , { where: { course } });
+    if (res[0]) {
+        return res[0];
+    } 
+    return undefined;
+}
+
+const findAllCourses = async () => {
+
+    const res = await Courses.findAll({ where: { } });
+
+    if (res.length > 0) return res.map(el => el.dataValues);
+    return;
+
+};
+
 export {
     Courses,
     createCourse,
     findCourseByCourse,
     deleteCourseByCourse,
-    findCourseBySubPart
+    findCourseBySubPart,
+    editPriceByCourse,
+    findAllCourses
 };   

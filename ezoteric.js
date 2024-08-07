@@ -21,7 +21,7 @@ const ezoteric = () => {
         if (action === 'ezoteric') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Езотерика"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Езотерика')
+                    inline_keyboard: await generateMenu('Езотерика')
                 } 
             })
             return;

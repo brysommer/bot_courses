@@ -21,7 +21,7 @@ const design = () => {
         if (action === 'design') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Графіка та дизайн"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Графіка та дизайн')
+                    inline_keyboard: await generateMenu('Графіка та дизайн')
                 } 
             })
             return;

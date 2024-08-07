@@ -21,7 +21,7 @@ const gpt = () => {
         if (action === 'gpt') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Нейромережі та Штучний інтелект"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Нейромережі та Штучний інтелект')
+                    inline_keyboard: await generateMenu('Нейромережі та Штучний інтелект')
                 } 
             })
             return;

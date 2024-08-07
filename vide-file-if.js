@@ -1,13 +1,17 @@
 import bot from "./bot.js";
 import values from "./values.js";
+import { findContentByCourse } from "./models/content.js";
 
 const returnVideoId = () => {
+
     bot.on('video', async (video) => {
         const fileId = video.video.file_id;
         const chatId = video.chat.id;
 
         await bot.sendMessage(chatId, fileId)
     });
+
+    
 
     bot.on('message', (msg) => {
         const chatId = msg.chat.id;

@@ -21,7 +21,7 @@ const permanent = () => {
         if (action === 'permanent') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Курси перманента"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Курси перманента')
+                    inline_keyboard: await generateMenu('Курси перманента')
                 } 
             })
             return;

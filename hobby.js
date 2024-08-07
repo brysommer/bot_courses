@@ -21,7 +21,7 @@ const hobby = () => {
         if (action === 'hobby') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Хобі. Рукоділля"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Хобі. Рукоділля')
+                    inline_keyboard: await generateMenu('Хобі. Рукоділля')
                 } 
             })
             return;

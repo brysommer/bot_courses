@@ -21,7 +21,7 @@ const manik = () => {
         if (action === 'manik') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Курси манікюру"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Курси манікюру')
+                    inline_keyboard: await generateMenu('Курси манікюру')
                 } 
             })
             return;

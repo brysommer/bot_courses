@@ -1,5 +1,8 @@
 import bot from './bot.js';
-import { createCourse, deleteCourseByCourse } from './models/courses.js';
+import { createCourse, deleteCourseByCourse, editPriceByCourse } from './models/courses.js';
+import { findContentByCourse } from './models/content.js'; 
+import { findAllCourses } from './models/courses.js';
+
 
 const processCreateCourse = async (text, chatId) => {
     try {
@@ -35,6 +38,49 @@ const processDeleteCourse = async (text, chatId) => {
     }
 };
 
+const processEditPriceCourse = async (text, chatId) => {
+    try {
+        const lines = text.split(';');
+                             
+        const result = await editPriceByCourse(lines[0], lines[1]);
+
+        bot.sendMessage(chatId, JSON.stringify(result))
+        
+    } catch (err) {
+
+        bot.sendMessage(chatId, 'Помилка при обробці тексту.');
+
+        console.error(err);
+
+    }
+}
+
+const processContentList = async (text, chatId) => {
+    try {
+                             
+        const result = await findContentByCourse(text);
+
+        bot.sendMessage(chatId, JSON.stringify(result))
+        
+    } catch (err) {
+        bot.sendMessage(chatId, 'Помилка при обробці тексту.');
+        console.error(err);
+    }
+};
+
+const processCoursesList = async (chatId) => {
+    try {
+                             
+        const result = await findAllCourses();
+
+        bot.sendMessage(chatId, JSON.stringify(result))
+        
+    } catch (err) {
+        bot.sendMessage(chatId, 'Помилка при обробці тексту.');
+        console.error(err);
+    }
+};
+
 
 export const createCourses = () =>{
     bot.on('message', (msg) => {
@@ -47,9 +93,16 @@ export const createCourses = () =>{
         } else if (text.startsWith('_dcourse')) {
             const coursesText = text.replace('_dcourse', '').trim();
             processDeleteCourse(coursesText, chatId);
+        } else if (text.startsWith('_editPricecourse')) {
+            const coursesText = text.replace('_editPricecourse', '').trim();
+            processEditPriceCourse(coursesText, chatId);
+        } else if (text.startsWith('_contentList')) {
+            const coursesText = text.replace('_contentList', '').trim();
+            processContentList(coursesText, chatId);
+        } else if (text.startsWith('_listCourses')) {
+            processCoursesList(chatId);
         }
-    });
-    
+    });    
 }
 
 export default createCourses;

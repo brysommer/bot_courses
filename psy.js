@@ -22,9 +22,10 @@ const psy = () => {
         if (action === 'psy') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі Психологія. Особисте зростання та саморозвиток. Мотивація', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Психологія. Особисте зростання та саморозвиток. Мотивація')
+                    inline_keyboard: await generateMenu('Психологія. Особисте зростання та саморозвиток. Мотивація')
                 } 
             })
+            return;
         }
 
         const courseNumber = action.split(' ')

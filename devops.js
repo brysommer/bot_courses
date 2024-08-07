@@ -21,7 +21,7 @@ const devops = () => {
         if (action === 'devops') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Програмування та Адміністрація"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Програмування та Адміністрація')
+                    inline_keyboard: await generateMenu('Програмування та Адміністрація')
                 } 
             })
             return;

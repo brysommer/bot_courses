@@ -21,7 +21,7 @@ const photo = () => {
         if (action === 'photo') {
             bot.sendMessage(chatId, 'Зараз ви знаходитися в розділі "Відеозйомка. Обробка фото"', { 
                 reply_markup: {
-                    inline_keyboard: generateMenu('Відеозйомка. Обробка фото')
+                    inline_keyboard: await generateMenu('Відеозйомка. Обробка фото')
                 } 
             })
             return;
